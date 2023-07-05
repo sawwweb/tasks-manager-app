@@ -1,13 +1,12 @@
-import { useState } from 'react'
+import { FC } from "react";
+import Wrapper from "./components/Wrapper";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: FC = () => {
   return (
     <>
-
+      <Wrapper />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
