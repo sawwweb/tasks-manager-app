@@ -4,6 +4,7 @@ import TasksList from "../TasksList";
 import TaskBody from "../TaskBody";
 
 const Wrapper: FC = () => {
+
 	return (
 		<div className={style.wrapper}>
 			<h1 className={style.title}>Tasks Manager</h1>
