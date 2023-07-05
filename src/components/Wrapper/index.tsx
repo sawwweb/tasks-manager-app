@@ -1,5 +1,7 @@
 import { FC } from "react";
 import style from './style.module.scss'
+import TasksList from "../TasksList";
+import TaskBody from "../TaskBody";
 
 const Wrapper: FC = () => {
 	return (
@@ -9,20 +11,13 @@ const Wrapper: FC = () => {
 			<div className={style.container}>
 				<div className={style.column}>
 
-					<ul className={style.tasks}>
-						<li>Task 1</li>
-						<li>Task 2</li>
-						<li>Task 3</li>
-						<li>Task 4</li>
-					</ul>
+					<TasksList />
 
 				</div>
 
 				<div className={style.column}>
 
-					<div className={style.taskBody}>
-						Текст Задачи
-					</div>
+					<TaskBody />
 
 				</div>
 
