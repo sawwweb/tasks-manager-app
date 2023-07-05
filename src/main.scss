@@ -2,3 +2,16 @@
 	margin: 0;
 	padding: 0;
 }
+
+.hide {
+	opacity: 0;
+	transition: .5s ease;
+	position: absolute;
+	transform: translateX(100%);
+}
+.show {
+	opacity: 1;
+	transition: .5s ease;
+	transform: translateX(0);
+	position: relative;
+}

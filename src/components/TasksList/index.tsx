@@ -3,6 +3,7 @@ import style from './style.module.scss'
 import TaskListItem from "../TaskListItem";
 import TasksStore from "../../store/TasksStore";
 import { observer } from "mobx-react-lite";
+import TaskForm from "../TaskForm";
 
 interface TasksListProps {
 
@@ -10,7 +11,7 @@ interface TasksListProps {
 
 const TasksList: FC<TasksListProps> = observer(() => {
 
-	const { tasks, addTask, completeTask, removeTask, setCurrentTask } = TasksStore;
+	const { tasks, addTask, addSubtask, completeTask, removeTask, setCurrentTask, currentTask } = TasksStore;
 
 	return (
 		<>
@@ -27,19 +28,9 @@ const TasksList: FC<TasksListProps> = observer(() => {
 				))}
 
 			</ul>
-			<button className={style.addTask} onClick={
-				() => addTask(
-					{
-						id: tasks.length + 1,
-						name: 'Task ' + (tasks.length + 1).toString(),
-						completed: false,
-						hasChildren: false,
-						body: 'Текст задачи ' + (tasks.length + 1).toString()
-					}
-				)
-			}>
-				Добавить
-			</button>
+
+			<TaskForm addTask={addTask} addSubtask={addSubtask} currentTask={currentTask} />
+
 		</>
 	);
 }

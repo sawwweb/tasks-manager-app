@@ -6,23 +6,36 @@ class TasksStore {
 	tasks = [
 		{
 			id: 1,
-			name: 'Task 1',
+			name: 'Задача 1',
 			completed: false,
-			hasChildren: true,
 			body: 'Текст задачи 1',
+			subtasks: [
+				{
+					id: 11,
+					name: 'Задача 1.1',
+					completed: false,
+					body: 'Текст задачи 1.1',
+					subtasks: [
+						{
+							id: 111,
+							name: 'Задача 1.1.1',
+							completed: false,
+							body: 'Текст задачи 1.1.1',
+						}
+					]
+				}
+			]
 		},
 		{
 			id: 2,
-			name: 'Task 2',
+			name: 'Задача 2',
 			completed: false,
-			hasChildren: false,
 			body: 'Текст задачи 2',
 		},
 		{
 			id: 3,
-			name: 'Task 3',
+			name: 'Задача 3',
 			completed: false,
-			hasChildren: false,
 			body: 'Текст задачи 3',
 		},
 	];
@@ -35,6 +48,18 @@ class TasksStore {
 
 	addTask = (task: Task) => {
 		this.tasks.push(task);
+	}
+
+	addSubtask = (currentTask: Task, subtask: Task) => {
+		if (currentTask === null) {
+			return
+		} else if (!currentTask.subtasks) {
+			currentTask.subtasks = []
+			currentTask.subtasks.push(subtask);
+		} else {
+			currentTask.subtasks.push(subtask);
+		}
+
 	}
 
 	removeTask = (id: number) => {

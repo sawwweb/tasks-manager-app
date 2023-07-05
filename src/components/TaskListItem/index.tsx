@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import style from './style.module.scss'
 import { Task } from "../../types";
 import { observer } from "mobx-react-lite";
@@ -11,6 +11,9 @@ interface TaskListItemProps {
 }
 
 const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, removeTask, setCurrentTask }) => {
+
+	const [open, setOpen] = useState(false);
+
 	return (
 		<li className={style.task} onClick={
 			(e) => {
@@ -18,33 +21,56 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 				setCurrentTask(task)
 			}
 		}>
-			{task.hasChildren && (
-				<span className={style.taskToggle}>
-					+
-				</span>
-			)}
-			<div className={style.taskTitle}>
-				{task.name}
+			<div className={style.mainTask}>
+				{task.subtasks && (
+					<span className={style.taskToggle} onClick={
+						() => {
+							setOpen(!open);
+						}
+					}>
+						{
+							open ? '-' : '+'
+						}
+					</span>
+				)}
+				<div className={style.taskTitle}>
+					{task.name}
+				</div>
+
+				{task.completed && (
+					<button className={style.taskRemove} onClick={(e) => {
+						e.stopPropagation();
+						removeTask(task.id);
+					}}>Удалить</button>
+				)}
+
+				<input
+					className={style.taskCheckbox}
+					type="checkbox"
+					name="isCompleted"
+					id={task.id.toString()}
+					checked={task.completed}
+					onChange={() => {
+						completeTask(task);
+					}}
+				/>
 			</div>
-
-			{task.completed && (
-				<button className={style.taskRemove} onClick={(e) => {
-					e.stopPropagation();
-					removeTask(task.id);
-				}}>Удалить</button>
-			)}
-
-			<input
-				className={style.taskCheckbox}
-				type="checkbox"
-				name="isCompleted"
-				id={task.id.toString()}
-				checked={task.completed}
-				onChange={() => {
-					completeTask(task);
-				}}
-			/>
-		</li>
+			{
+				task.subtasks && (
+					<ul className={style.subtasks + (open ? '' : ' hide')}>
+						{task.subtasks.map((subtask) => (
+							<TaskListItem
+								key={subtask.id}
+								task={subtask}
+								completeTask={completeTask}
+								removeTask={removeTask}
+								setCurrentTask={setCurrentTask}
+							/>
+						))}
+					</ul>
+				)
+			}
+		</li >
 	);
 }
 )
