@@ -6,11 +6,12 @@ import { observer } from "mobx-react-lite";
 interface TaskListItemProps {
 	task: Task
 	completeTask: (task: Task) => void
-	removeTask: (id: number) => void
+	removeTask: (id: number, parentTask: Task | null) => void
 	setCurrentTask: (task: Task | null) => void
+	parentTask: Task
 }
 
-const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, removeTask, setCurrentTask }) => {
+const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, removeTask, setCurrentTask, parentTask }) => {
 
 	const [open, setOpen] = useState(false);
 
@@ -22,7 +23,7 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 			}
 		}>
 			<div className={style.mainTask}>
-				{task.subtasks && (
+				{task.subtasks?.length > 0 && (
 					<span className={style.taskToggle} onClick={
 						() => {
 							setOpen(!open);
@@ -40,7 +41,7 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 				{task.completed && (
 					<button className={style.taskRemove} onClick={(e) => {
 						e.stopPropagation();
-						removeTask(task.id);
+						removeTask(task.id, parentTask);
 					}}>Удалить</button>
 				)}
 
@@ -65,6 +66,7 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 								completeTask={completeTask}
 								removeTask={removeTask}
 								setCurrentTask={setCurrentTask}
+								parentTask={task}
 							/>
 						))}
 					</ul>

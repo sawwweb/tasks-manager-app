@@ -4,4 +4,5 @@ export type Task = {
 	completed: boolean;
 	body: string;
 	subtasks?: Task[];
+	parentTask?: Task;
 }
