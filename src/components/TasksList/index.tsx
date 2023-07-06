@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import style from './style.module.scss'
 import TaskListItem from "../TaskListItem";
 import TasksStore from "../../store/TasksStore";
@@ -11,13 +11,18 @@ interface TasksListProps {
 
 const TasksList: FC<TasksListProps> = observer(() => {
 
-	const { tasks, addTask, addSubtask, completeTask, removeTask, setCurrentTask, currentTask } = TasksStore;
+	const { addTask, addSubtask, completeTask, removeTask, setCurrentTask, currentTask, searchTasks, searchResults } = TasksStore;
+
+	useEffect(() => {
+		searchTasks("");
+	}, [])
 
 	return (
 		<>
+			<input type="text" placeholder="Поиск" onChange={(e) => searchTasks(e.target.value)} />
 			<ul className={style.tasks}>
 
-				{tasks.map((task) => (
+				{searchResults.map((task) => (
 					<TaskListItem
 						key={task.id}
 						task={task}
@@ -26,6 +31,10 @@ const TasksList: FC<TasksListProps> = observer(() => {
 						setCurrentTask={setCurrentTask}
 					/>
 				))}
+
+				{searchResults.length === 0 && (
+					<li>Ничего не найдено</li>
+				)}
 
 			</ul>
 

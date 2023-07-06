@@ -42,6 +42,8 @@ class TasksStore {
 
 	currentTask: Task | null = null;
 
+	searchResults: Task[] = [];
+
 	constructor() {
 		makeAutoObservable(this);
 		this.loadTasksFromLocalStorage();
@@ -100,6 +102,18 @@ class TasksStore {
 		if (savedTasks) {
 			this.tasks = JSON.parse(savedTasks);
 		}
+	};
+
+	searchTasks = (query: string) => {
+		if (!query.trim()) {
+			this.searchResults = this.tasks;
+			return;
+		}
+
+		const lowerCaseQuery = query.toLowerCase();
+		this.searchResults = this.tasks.filter(task =>
+			task.name.toLowerCase().includes(lowerCaseQuery)
+		);
 	};
 
 }
