@@ -19,7 +19,6 @@ const TasksList: FC<TasksListProps> = observer(() => {
 
 	return (
 		<>
-			<input type="text" placeholder="Поиск" onChange={(e) => searchTasks(e.target.value)} />
 			<ul className={style.tasks}>
 
 				{searchResults.map((task) => (
@@ -28,7 +27,9 @@ const TasksList: FC<TasksListProps> = observer(() => {
 						task={task}
 						completeTask={completeTask}
 						removeTask={removeTask}
+						currentTask={currentTask}
 						setCurrentTask={setCurrentTask}
+						parentTask={null}
 					/>
 				))}
 

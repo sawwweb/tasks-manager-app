@@ -13,8 +13,39 @@ const TaskForm: FC<TaskFormProps> = ({ addTask, addSubtask, currentTask }) => {
 	const [taskName, setTaskName] = useState('');
 	const [taskBody, setTaskBody] = useState('');
 
+	const addTaskHandler = () => {
+		if (taskName && taskBody) {
+			addTask({
+				id: Date.now(),
+				name: taskName,
+				completed: false,
+				body: taskBody,
+			})
+			setTaskName('');
+			setTaskBody('');
+		} else {
+			alert('Заполните все поля');
+		}
+	}
+
+	const addSubTaskHandler = (currentTask: Task) => {
+		if (taskName && taskBody) {
+			addSubtask(currentTask, {
+				id: Date.now(),
+				name: taskName,
+				completed: false,
+				body: taskBody,
+			})
+			setTaskName('');
+			setTaskBody('');
+		} else {
+			alert('Заполните все поля');
+		}
+	}
+
 	return (
 		<div className={style.addBlock}>
+			<div>Добавить задачу</div>
 			<input
 				type="text"
 				value={taskName}
@@ -24,52 +55,34 @@ const TaskForm: FC<TaskFormProps> = ({ addTask, addSubtask, currentTask }) => {
 					setTaskName(e.target.value);
 				}}
 			/>
-			<input
-				type="text"
+			<textarea
 				value={taskBody}
-				className={style.addTaskInput}
+				className={style.addTaskTextarea}
 				placeholder="Описание задачи"
 				onChange={(e) => {
 					setTaskBody(e.target.value);
 				}}
-			/>
-			<button
-				className={style.addTask}
-				onClick={() => {
-					addTask(
-						{
-							id: Date.now(),
-							name: taskName,
-							completed: false,
-							body: taskBody,
-						}
-					)
-					setTaskName('');
-					setTaskBody('');
-				}
-				}
-			>
-				Добавить задачу
-			</button>
-			{currentTask && (
+			></textarea>
+
+			<div className={style.addBlockButtons}>
+
 				<button
 					className={style.addTask}
-					onClick={() => {
-						addSubtask(currentTask, {
-							id: Date.now(),
-							name: taskName,
-							completed: false,
-							body: taskBody,
-						})
-
-						setTaskName('');
-						setTaskBody('');
-					}
-					}
+					onClick={() => addTaskHandler()}
 				>
-					Добавить подзадачу
+					Добавить задачу
 				</button>
-			)}
+				{currentTask && (
+					<button
+						className={style.addTask}
+						onClick={() => addSubTaskHandler(currentTask)}
+					>
+						Добавить подзадачу
+					</button>
+				)}
+
+			</div>
+
 		</div >
 	);
 }

@@ -1,4 +1,6 @@
 .taskBody{
-	background-color: grey;
-	color: white;
+	display: flex;
+	p {
+		word-break: break-word;
+	}
 }

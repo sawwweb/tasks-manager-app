@@ -14,7 +14,9 @@ const TaskBody: FC<TaskBodyProps> = observer(() => {
 	return (
 		<div className={style.taskBody}>
 			{currentTask !== null ? (
-				currentTask.body
+				<p>
+					{currentTask.body}
+				</p>
 			) : (
 				<span>Выберите задачу</span>
 			)}

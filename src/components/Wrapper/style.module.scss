@@ -7,8 +7,15 @@
 	margin-top: 2rem;
 }
 
+.header {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
 .container {
 	display: flex;
+	padding: 1.25rem;
 	@media screen and (max-width: 768px) {
 		flex-direction: column;		
 	}

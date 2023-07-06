@@ -72,9 +72,8 @@ class TasksStore {
 		} else if (parentTask.subtasks) {
 			parentTask.subtasks = parentTask.subtasks.filter(subtask => subtask.id !== id);
 		}
-		if (this.currentTask?.id === id) {
-			this.currentTask = null;
-		}
+		this.currentTask = null;
+		this.searchTasks("");
 		this.saveTasksToLocalStorage();
 	};
 
@@ -114,6 +113,7 @@ class TasksStore {
 		this.searchResults = this.tasks.filter(task =>
 			task.name.toLowerCase().includes(lowerCaseQuery)
 		);
+		this.currentTask = null;
 	};
 
 }

@@ -7,13 +7,16 @@ interface TaskListItemProps {
 	task: Task
 	completeTask: (task: Task) => void
 	removeTask: (id: number, parentTask: Task | null) => void
+	currentTask: Task | null
 	setCurrentTask: (task: Task | null) => void
-	parentTask: Task
+	parentTask: Task | null
 }
 
-const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, removeTask, setCurrentTask, parentTask }) => {
+const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, removeTask, currentTask, setCurrentTask, parentTask }) => {
 
 	const [open, setOpen] = useState(false);
+
+	const currentClassName = currentTask === task ? style.current : ''
 
 	return (
 		<li className={style.task} onClick={
@@ -22,7 +25,7 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 				setCurrentTask(task)
 			}
 		}>
-			<div className={style.mainTask}>
+			<div className={style.taskItem + ' ' + currentClassName}>
 				{task.subtasks?.length > 0 && (
 					<span className={style.taskToggle} onClick={
 						() => {
@@ -65,6 +68,7 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 								task={subtask}
 								completeTask={completeTask}
 								removeTask={removeTask}
+								currentTask={currentTask}
 								setCurrentTask={setCurrentTask}
 								parentTask={task}
 							/>

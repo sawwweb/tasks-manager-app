@@ -2,12 +2,21 @@ import { FC } from "react";
 import style from './style.module.scss'
 import TasksList from "../TasksList";
 import TaskBody from "../TaskBody";
+import TaskSearch from "../TaskSearch";
+import TasksStore from "../../store/TasksStore";
 
 const Wrapper: FC = () => {
 
+	const { searchTasks } = TasksStore;
+
 	return (
 		<div className={style.wrapper}>
-			<h1 className={style.title}>Tasks Manager</h1>
+
+			<div className={style.header}>
+				<h1 className={style.title}>Менеджер задач</h1>
+
+				<TaskSearch searchTasks={searchTasks} />
+			</div>
 
 			<div className={style.container}>
 				<div className={style.column}>
