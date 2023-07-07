@@ -3,7 +3,7 @@ import style from './style.module.scss'
 import { Task } from "../../types";
 import { observer } from "mobx-react-lite";
 import TaskCheckbox from "../TaskCheckbox";
-import TaskRemoveBtn from "../TaskRemoveBtn";
+import TaskRemoveBtn from "../TaskRemoveButton";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 
 interface TaskListItemProps {
@@ -35,10 +35,10 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 						setOpen(!open);
 					}
 				}>
-					{task.subtasks?.length > 0 && (
-
-						open ? <FaAngleUp /> : <FaAngleDown />
-
+					{task.subtasks && (
+						task.subtasks?.length > 0 && (
+							open ? <FaAngleUp /> : <FaAngleDown />
+						)
 					)}
 				</span>
 

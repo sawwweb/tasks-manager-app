@@ -3,15 +3,10 @@ import style from './style.module.scss'
 import TaskListItem from "../TaskListItem";
 import TasksStore from "../../store/TasksStore";
 import { observer } from "mobx-react-lite";
-import TaskForm from "../TaskForm";
 
-interface TasksListProps {
+const TasksList: FC = observer(() => {
 
-}
-
-const TasksList: FC<TasksListProps> = observer(() => {
-
-	const { addTask, addSubtask, completeTask, removeTask, setCurrentTask, currentTask, searchTasks, searchResults } = TasksStore;
+	const { completeTask, removeTask, setCurrentTask, currentTask, searchTasks, searchResults } = TasksStore;
 
 	useEffect(() => {
 		searchTasks("");
@@ -38,8 +33,6 @@ const TasksList: FC<TasksListProps> = observer(() => {
 				)}
 
 			</ul>
-
-			<TaskForm addTask={addTask} addSubtask={addSubtask} currentTask={currentTask} />
 
 		</>
 	);

@@ -3,7 +3,7 @@ import { Task } from '../types';
 
 class TasksStore {
 
-	tasks = [
+	tasks: Task[] = [
 		{
 			id: 1,
 			name: 'Задача 1',
@@ -64,8 +64,6 @@ class TasksStore {
 			currentTask.subtasks.push(subtask);
 		}
 		this.saveTasksToLocalStorage();
-
-		//make parentTask open on added subtask
 	}
 
 	removeTask = (id: number, parentTask: Task | null = null) => {
@@ -82,14 +80,21 @@ class TasksStore {
 	completeTask = (task: Task) => {
 		task.completed = !task.completed;
 
-		if (task.subtasks) {
-			for (const subtask of task.subtasks) {
-				this.completeTask(subtask);
+		const completeSubtasks = (subtasks: Task[]) => {
+			for (const subtask of subtasks) {
+				subtask.completed = task.completed;
+				if (subtask.subtasks) {
+					completeSubtasks(subtask.subtasks);
+				}
 			}
+		};
+
+		if (task.subtasks) {
+			completeSubtasks(task.subtasks);
 		}
+
 		this.saveTasksToLocalStorage();
-		//make completed subtasks should stay complete on parent task complete
-	}
+	};
 
 	setCurrentTask = (task: Task | null) => {
 		this.currentTask = task;

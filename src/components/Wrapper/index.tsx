@@ -5,10 +5,12 @@ import TaskBody from "../TaskBody";
 import TaskSearch from "../TaskSearch";
 import TasksStore from "../../store/TasksStore";
 import ThemeSwitcher from "../ThemeSwitcher";
+import TaskForm from "../TaskForm";
+import { observer } from "mobx-react-lite";
 
-const Wrapper: FC = () => {
+const Wrapper: FC = observer(() => {
 
-	const { searchTasks } = TasksStore;
+	const { searchTasks, addTask, addSubtask, currentTask } = TasksStore;
 
 	return (
 		<div className={style.wrapper}>
@@ -32,6 +34,12 @@ const Wrapper: FC = () => {
 
 					<TaskBody />
 
+					<TaskForm
+						addTask={addTask}
+						addSubtask={addSubtask}
+						currentTask={currentTask}
+					/>
+
 				</div>
 
 			</div>
@@ -39,5 +47,5 @@ const Wrapper: FC = () => {
 		</div>
 	);
 }
-
+)
 export default Wrapper;

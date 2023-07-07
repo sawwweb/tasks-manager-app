@@ -1,5 +1,7 @@
 .taskBody{
 	display: flex;
+	background-color: var(--secondary-color);
+	padding: 0.5rem;
 	p {
 		word-break: break-word;
 	}

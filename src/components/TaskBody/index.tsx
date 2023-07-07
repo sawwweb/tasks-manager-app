@@ -3,11 +3,7 @@ import style from './style.module.scss'
 import TasksStore from "../../store/TasksStore";
 import { observer } from "mobx-react-lite";
 
-interface TaskBodyProps {
-
-}
-
-const TaskBody: FC<TaskBodyProps> = observer(() => {
+const TaskBody: FC = observer(() => {
 
 	const { currentTask } = TasksStore;
 
