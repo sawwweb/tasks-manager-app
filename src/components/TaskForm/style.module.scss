@@ -14,6 +14,7 @@
 
 	color: var(--font-color);
 	background-color: var(--bg-color);
+	transition: .3s;
 }
 .addTaskTextarea {
 	padding: 0.25rem;
@@ -25,6 +26,7 @@
 
 	color: var(--font-color);
 	background-color: var(--bg-color);
+	transition: .3s;
 }
 .addBlockButtons {
 	display: flex;
@@ -41,5 +43,6 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+		transition: .3s;
 	}
 }

@@ -4,11 +4,7 @@ import { observer } from "mobx-react-lite";
 import { FaRegMoon, FaRegSun } from "react-icons/fa";
 import style from "./style.module.scss";
 
-interface ThemeSwitcherProps {
-
-}
-
-const ThemeSwitcher: FC<ThemeSwitcherProps> = observer(() => {
+const ThemeSwitcher: FC = observer(() => {
 
 	const { theme, themeChange } = ThemeStore;
 
