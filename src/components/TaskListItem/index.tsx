@@ -2,6 +2,9 @@ import { FC, useState } from "react";
 import style from './style.module.scss'
 import { Task } from "../../types";
 import { observer } from "mobx-react-lite";
+import TaskCheckbox from "../TaskCheckbox";
+import TaskRemoveBtn from "../TaskRemoveBtn";
+import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 
 interface TaskListItemProps {
 	task: Task
@@ -26,38 +29,36 @@ const TaskListItem: FC<TaskListItemProps> = observer(({ task, completeTask, remo
 			}
 		}>
 			<div className={style.taskItem + ' ' + currentClassName}>
-				{task.subtasks?.length > 0 && (
-					<span className={style.taskToggle} onClick={
-						() => {
-							setOpen(!open);
-						}
-					}>
-						{
-							open ? '-' : '+'
-						}
-					</span>
-				)}
+
+				<span className={style.taskToggle} onClick={
+					() => {
+						setOpen(!open);
+					}
+				}>
+					{task.subtasks?.length > 0 && (
+
+						open ? <FaAngleUp /> : <FaAngleDown />
+
+					)}
+				</span>
+
 				<div className={style.taskTitle}>
 					{task.name}
 				</div>
 
 				{task.completed && (
-					<button className={style.taskRemove} onClick={(e) => {
-						e.stopPropagation();
-						removeTask(task.id, parentTask);
-					}}>Удалить</button>
+					<TaskRemoveBtn
+						removeTask={removeTask}
+						taskId={task.id}
+						parentTask={parentTask}
+					/>
 				)}
 
-				<input
-					className={style.taskCheckbox}
-					type="checkbox"
-					name="isCompleted"
-					id={task.id.toString()}
-					checked={task.completed}
-					onChange={() => {
-						completeTask(task);
-					}}
+				<TaskCheckbox
+					task={task}
+					completeTask={completeTask}
 				/>
+
 			</div>
 			{
 				task.subtasks && (

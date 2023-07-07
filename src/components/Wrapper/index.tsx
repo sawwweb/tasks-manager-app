@@ -4,6 +4,7 @@ import TasksList from "../TasksList";
 import TaskBody from "../TaskBody";
 import TaskSearch from "../TaskSearch";
 import TasksStore from "../../store/TasksStore";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 const Wrapper: FC = () => {
 
@@ -14,6 +15,8 @@ const Wrapper: FC = () => {
 
 			<div className={style.header}>
 				<h1 className={style.title}>Менеджер задач</h1>
+
+				<ThemeSwitcher />
 
 				<TaskSearch searchTasks={searchTasks} />
 			</div>

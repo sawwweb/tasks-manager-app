@@ -11,11 +11,16 @@
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	align-items: center;
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		
+	}
 }
 
 .container {
 	display: flex;
-	padding: 1.25rem;
+	padding: 1.25rem 0;
 	@media screen and (max-width: 768px) {
 		flex-direction: column;		
 	}
@@ -24,4 +29,7 @@
 .column {
 	padding: 1rem;
 	width: 50%;
+	@media screen and (max-width: 768px) {
+		width: 100%;		
+	}
 }

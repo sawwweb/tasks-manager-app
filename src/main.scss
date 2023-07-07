@@ -1,11 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+:root {
+	--primary-color: #7d78f4;
+	--secondary-color: #b1aff3;
+	--font-color: #424242;
+	--bg-color: #fff;
+	--heading-color: #292922;
+}
+
+[data-theme="dark"] {
+	--primary-color: #9A97F3;
+	--secondary-color: #818cab;
+	--font-color: #e1e1ff;
+	--bg-color: #161625;
+	--heading-color: #818cab;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	font-family: Montserrat;
-	color: #333;
 	box-sizing: border-box;
+}
+
+html {
+	background-color: var(--bg-color);
+  color: var(--font-color);
+
+	transition: .3s;
+}
+
+h1 {
+	color: var(--heading-color);
 }
 
 .hide {
@@ -13,6 +39,7 @@
 	transition: .5s ease;
 	position: absolute;
 	transform: translateX(100%);
+	z-index: -1;
 }
 .show {
 	opacity: 1;

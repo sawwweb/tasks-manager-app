@@ -1,0 +1,16 @@
+.taskRemove{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 0.25rem;
+
+	&:hover{
+		svg {
+			fill: var(--font-color);
+		}
+	}
+
+	svg {
+		fill: var(--font-color);
+	}
+}

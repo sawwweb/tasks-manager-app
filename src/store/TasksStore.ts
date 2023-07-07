@@ -64,6 +64,8 @@ class TasksStore {
 			currentTask.subtasks.push(subtask);
 		}
 		this.saveTasksToLocalStorage();
+
+		//make parentTask open on added subtask
 	}
 
 	removeTask = (id: number, parentTask: Task | null = null) => {
@@ -86,6 +88,7 @@ class TasksStore {
 			}
 		}
 		this.saveTasksToLocalStorage();
+		//make completed subtasks should stay complete on parent task complete
 	}
 
 	setCurrentTask = (task: Task | null) => {

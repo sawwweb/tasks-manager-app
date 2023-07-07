@@ -1,3 +1,15 @@
+.searchLabel {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
 .searchInput {
 	padding: 0.25rem;
+	border: none;
+	outline: none;
+	border-bottom: 1px #333 solid;
+
+	color: var(--font-color);
+	background-color: var(--bg-color);
 }
